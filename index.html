@@ -1,0 +1,688 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Glenn Gonzaga - Web developer specializing in responsive websites, PHP, Laravel, and business-focused web solutions." />
+  <meta name="theme-color" content="#f8fafc" />
+  <title>Glenn Gonzaga | Web Developer & Digital Solutions</title>
+
+  <!-- Local Tailwind CSS through Vite -->
+  <link rel="stylesheet" href="/src/style.css" />
+
+  <!-- External icons and fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { font-family: 'Inter', sans-serif; }
+    .hero-bg {
+      background-image: linear-gradient(90deg, rgba(8,18,40,.94), rgba(8,18,40,.75) 55%, rgba(8,18,40,.4)),
+      url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2000&q=85');
+      background-size: cover;
+      background-position: center;
+    }
+    .section-light { background-color: #ffffff; color: #0f172a; }
+    .section-soft { background-color: #f8fafc; color: #0f172a; }
+    .site-header { background: rgba(255,255,255,.92); border-color: #e2e8f0; }
+    .muted { color: #64748b; }
+    .surface { background-color: #ffffff; border: 1px solid #e2e8f0; }
+    .tech-icon { transition: transform .2s ease, color .2s ease; }
+    .tech-icon:hover { transform: translateY(-5px); color: #2563eb; }
+    .project-card { transition: transform .25s ease, box-shadow .25s ease; }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(15,23,42,.1); }
+    .reveal { animation: appear .7s ease both; }
+    @keyframes appear { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Dark theme works without changing your Tailwind configuration */
+    html.dark body { background: #0b1120; color: #e2e8f0; }
+    html.dark .section-light,
+    html.dark .section-soft { background-color: #0b1120; color: #e2e8f0; }
+    html.dark .site-header { background: rgba(11,17,32,.94); border-color: #243047; }
+    html.dark .surface { background-color: #111c30; border-color: #26344b; }
+    html.dark .muted { color: #a3b1c6; }
+    html.dark .theme-text { color: #e2e8f0 !important; }
+    html.dark .theme-subtle { color: #a3b1c6 !important; }
+    html.dark .theme-border { border-color: #26344b !important; }
+    html.dark .nav-link { color: #cbd5e1; }
+    html.dark .nav-link:hover { color: #60a5fa; }
+    html.dark .form-field { background: #0b1120; border-color: #334155; color: #e2e8f0; }
+    html.dark .form-field::placeholder { color: #94a3b8; }
+    html.dark .testimonial-quote { color: #cbd5e1; }
+    html.dark footer { background: #060b16; }
+    html.dark .project-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,.3); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+  <!-- ================= NAVIGATION ================= -->
+  <header class="site-header fixed top-0 z-50 w-full border-b backdrop-blur-lg">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+      <a href="#home" class="flex items-center gap-3" aria-label="Glenn Gonzaga home">
+        <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-lg font-extrabold text-white">GG</span>
+        <span class="text-lg font-extrabold tracking-tight theme-text">Glenn Gonzaga<span class="text-blue-600">.</span></span>
+      </a>
+
+      <div id="desktopNav" class="hidden items-center gap-7 md:flex">
+        <a href="#home" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-600">Home</a>
+        <a href="#about" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-600">About</a>
+        <a href="#services" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-600">Services</a>
+        <a href="#projects" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-600">Projects</a>
+        <a href="#contact" class="nav-link text-sm font-semibold text-slate-600 hover:text-blue-600">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="themeToggle" type="button" aria-label="Switch to dark mode" title="Toggle light/dark mode"
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition hover:bg-slate-100">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+        </button>
+
+        <a href="#contact" class="hidden rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 sm:inline-flex">
+          Hire Me <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+        </a>
+
+        <button id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
+          class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 md:hidden">
+          <i id="menuIcon" class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobileNav" class="hidden border-t border-slate-200 px-5 pb-5 pt-3 md:hidden">
+      <div class="flex flex-col gap-1">
+        <a href="#home" class="nav-link rounded-lg px-3 py-3 text-sm font-semibold">Home</a>
+        <a href="#about" class="nav-link rounded-lg px-3 py-3 text-sm font-semibold">About Me</a>
+        <a href="#services" class="nav-link rounded-lg px-3 py-3 text-sm font-semibold">Services</a>
+        <a href="#projects" class="nav-link rounded-lg px-3 py-3 text-sm font-semibold">Featured Projects</a>
+        <a href="#testimonials" class="nav-link rounded-lg px-3 py-3 text-sm font-semibold">Testimonials</a>
+        <a href="#contact" class="nav-link rounded-lg px-3 py-3 text-sm font-semibold">Contact Me</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section id="home" class="hero-bg flex min-h-screen items-center pt-24 text-white">
+      <div class="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-2 lg:px-8 lg:py-28">
+        <div class="reveal">
+          <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-blue-300/30 bg-blue-400/10 px-4 py-2 text-sm font-medium text-blue-200">
+            <span class="h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
+            Web Development & Digital Solutions
+          </div>
+
+          <p class="mb-3 text-lg font-semibold text-blue-300">Hello, I'm</p>
+          <h1 class="max-w-2xl text-5xl font-extrabold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
+            Glenn <span class="text-blue-400">Gonzaga</span>
+          </h1>
+
+          <h2 class="mt-5 text-xl font-semibold text-slate-200 sm:text-2xl">
+            Web Developer | PHP & Laravel
+          </h2>
+
+          <p class="mt-6 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
+            Providing solutions to business problems through modern, responsive, and user-friendly websites that help businesses grow online.
+          </p>
+
+          <div class="mt-9 flex flex-wrap gap-4">
+            <a href="#projects" class="rounded-full bg-blue-600 px-7 py-3.5 font-bold text-white shadow-xl shadow-blue-600/25 transition hover:-translate-y-1 hover:bg-blue-500">
+              Explore My Work <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+            <a href="#contact" class="rounded-full border border-white/30 px-7 py-3.5 font-bold text-white transition hover:bg-white/10">
+              Let's Talk <i class="fa-regular fa-paper-plane ml-2"></i>
+            </a>
+          </div>
+
+          <div class="mt-12 flex flex-wrap items-center gap-6 border-t border-white/15 pt-7">
+            <div>
+              <p class="text-2xl font-extrabold">PHP</p>
+              <p class="mt-1 text-xs text-slate-400">Backend</p>
+            </div>
+            <div class="h-10 w-px bg-white/20"></div>
+            <div>
+              <p class="text-2xl font-extrabold">Laravel</p>
+              <p class="mt-1 text-xs text-slate-400">Framework</p>
+            </div>
+            <div class="h-10 w-px bg-white/20"></div>
+            <div>
+              <p class="text-2xl font-extrabold">Tailwind</p>
+              <p class="mt-1 text-xs text-slate-400">Frontend</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative mx-auto w-full max-w-lg">
+          <div class="absolute -inset-5 rounded-[2rem] bg-blue-500/20 blur-3xl"></div>
+          <div class="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-md">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=85"
+              alt="Developer working on a computer" class="h-64 w-full rounded-2xl object-cover sm:h-80" />
+            <div class="p-5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-lg font-bold">Building digital experiences</p>
+                  <p class="mt-1 text-sm text-slate-300">From design to deployment</p>
+                </div>
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500 text-xl">
+                  <i class="fa-solid fa-code"></i>
+                </div>
+              </div>
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span class="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold">HTML & CSS</span>
+                <span class="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold">JavaScript</span>
+                <span class="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold">PHP</span>
+                <span class="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold">Laravel</span>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -bottom-6 -left-4 hidden items-center gap-3 rounded-2xl bg-white p-4 text-slate-900 shadow-xl sm:flex">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-green-100 text-xl text-green-600">
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold">Business-focused</p>
+              <p class="text-xs text-slate-500">Practical web solutions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="section-light py-24">
+      <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:px-8">
+        <div class="relative mx-auto w-full max-w-md">
+          <div class="absolute -bottom-5 -left-5 h-36 w-36 rounded-3xl bg-blue-100"></div>
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
+            alt="Workspace for web development" class="relative h-[420px] w-full rounded-3xl object-cover shadow-xl" />
+          <div class="absolute -right-4 top-8 rounded-2xl bg-blue-600 px-5 py-4 text-white shadow-xl">
+            <i class="fa-solid fa-lightbulb mr-2"></i>
+            <span class="font-bold">Ideas into solutions</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="mb-3 text-sm font-bold uppercase tracking-[.2em] text-blue-600">Get to know me</p>
+          <h2 class="theme-text text-3xl font-extrabold tracking-tight sm:text-4xl">About Me</h2>
+          <p class="muted mt-6 leading-8">
+            I'm Glenn Gonzaga, an aspiring web developer focused on creating functional, responsive, and accessible websites. I enjoy combining frontend design with backend programming to build useful digital experiences.
+          </p>
+          <p class="muted mt-4 leading-8">
+            My background in administrative and warehouse operations has helped me understand business workflows, inventory processes, and everyday operational challenges. I want to use that perspective to develop practical web solutions for businesses.
+          </p>
+
+          <div class="mt-7 grid gap-4 sm:grid-cols-2">
+            <div class="surface rounded-xl p-4">
+              <i class="fa-solid fa-desktop mb-3 text-xl text-blue-600"></i>
+              <h3 class="theme-text font-bold">Frontend Development</h3>
+              <p class="muted mt-2 text-sm leading-6">Responsive layouts, user interfaces, and interactive experiences.</p>
+            </div>
+            <div class="surface rounded-xl p-4">
+              <i class="fa-solid fa-server mb-3 text-xl text-blue-600"></i>
+              <h3 class="theme-text font-bold">Backend Development</h3>
+              <p class="muted mt-2 text-sm leading-6">PHP, Laravel fundamentals, application logic, and data handling.</p>
+            </div>
+          </div>
+
+          <a href="#contact" class="mt-8 inline-flex items-center gap-2 font-bold text-blue-600 hover:text-blue-700">
+            Discuss your project <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section id="services" class="section-soft py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-sm font-bold uppercase tracking-[.2em] text-blue-600">What I can help with</p>
+          <h2 class="theme-text mt-3 text-3xl font-extrabold sm:text-4xl">My Services</h2>
+          <p class="muted mt-4 leading-7">Practical website and digital solutions designed around your business needs.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <article class="surface rounded-2xl p-7 transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-2xl text-blue-600">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h3 class="theme-text mt-6 text-xl font-bold">Website Development</h3>
+            <p class="muted mt-3 leading-7">Modern, responsive websites for small businesses, personal brands, and service providers.</p>
+            <p class="mt-5 text-sm font-semibold text-blue-600">HTML · CSS · JavaScript</p>
+          </article>
+
+          <article class="surface rounded-2xl p-7 transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-100 text-2xl text-purple-600">
+              <i class="fa-brands fa-laravel"></i>
+            </div>
+            <h3 class="theme-text mt-6 text-xl font-bold">PHP & Laravel Solutions</h3>
+            <p class="muted mt-3 leading-7">Backend application development, dynamic pages, database integration, and CRUD workflows.</p>
+            <p class="mt-5 text-sm font-semibold text-blue-600">PHP · Laravel · MySQL</p>
+          </article>
+
+          <article class="surface rounded-2xl p-7 transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-2xl text-green-600">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <h3 class="theme-text mt-6 text-xl font-bold">E-commerce Websites</h3>
+            <p class="muted mt-3 leading-7">Product listings, shopping experiences, cart workflows, and store interfaces.</p>
+            <p class="mt-5 text-sm font-semibold text-blue-600">Storefronts · Product UI · PHP</p>
+          </article>
+
+          <article class="surface rounded-2xl p-7 transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-2xl text-orange-600">
+              <i class="fa-solid fa-pen-ruler"></i>
+            </div>
+            <h3 class="theme-text mt-6 text-xl font-bold">Website Redesign</h3>
+            <p class="muted mt-3 leading-7">Improve layout, visual consistency, mobile usability, and the overall browsing experience.</p>
+            <p class="mt-5 text-sm font-semibold text-blue-600">UI · Responsive Design · Tailwind</p>
+          </article>
+
+          <article class="surface rounded-2xl p-7 transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-pink-100 text-2xl text-pink-600">
+              <i class="fa-solid fa-gauge-high"></i>
+            </div>
+            <h3 class="theme-text mt-6 text-xl font-bold">Business Workflow Tools</h3>
+            <p class="muted mt-3 leading-7">Explore lightweight inventory, tracking, and reporting tools to help organize business processes.</p>
+            <p class="mt-5 text-sm font-semibold text-blue-600">Forms · Data · Workflow</p>
+          </article>
+
+          <article class="surface rounded-2xl p-7 transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-100 text-2xl text-cyan-600">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <h3 class="theme-text mt-6 text-xl font-bold">Website Maintenance</h3>
+            <p class="muted mt-3 leading-7">Help with content updates, interface adjustments, bug fixes, and ongoing improvements.</p>
+            <p class="mt-5 text-sm font-semibold text-blue-600">Updates · Fixes · Improvements</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TECHNOLOGY STACK ================= -->
+    <section id="stack" class="section-light py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="text-center">
+          <p class="text-sm font-bold uppercase tracking-[.2em] text-blue-600">Tools of my trade</p>
+          <h2 class="theme-text mt-3 text-3xl font-extrabold sm:text-4xl">Technology Stack</h2>
+          <p class="muted mt-4">Technologies I use and am actively developing my skills in.</p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-html5 text-4xl text-orange-500"></i>
+            <p class="theme-text mt-4 font-bold">HTML5</p><p class="muted mt-1 text-xs">Frontend</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-css3-alt text-4xl text-blue-500"></i>
+            <p class="theme-text mt-4 font-bold">CSS3</p><p class="muted mt-1 text-xs">Styling</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-js text-4xl text-yellow-500"></i>
+            <p class="theme-text mt-4 font-bold">JavaScript</p><p class="muted mt-1 text-xs">Interactivity</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-php text-4xl text-indigo-500"></i>
+            <p class="theme-text mt-4 font-bold">PHP</p><p class="muted mt-1 text-xs">Backend</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-laravel text-4xl text-red-500"></i>
+            <p class="theme-text mt-4 font-bold">Laravel</p><p class="muted mt-1 text-xs">PHP Framework</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-solid fa-wind text-4xl text-cyan-500"></i>
+            <p class="theme-text mt-4 font-bold">Tailwind CSS</p><p class="muted mt-1 text-xs">Utility CSS</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-bootstrap text-4xl text-purple-600"></i>
+            <p class="theme-text mt-4 font-bold">Bootstrap</p><p class="muted mt-1 text-xs">UI Framework</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-solid fa-database text-4xl text-blue-500"></i>
+            <p class="theme-text mt-4 font-bold">MySQL</p><p class="muted mt-1 text-xs">Database</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-git-alt text-4xl text-orange-600"></i>
+            <p class="theme-text mt-4 font-bold">Git</p><p class="muted mt-1 text-xs">Version Control</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-github text-4xl"></i>
+            <p class="theme-text mt-4 font-bold">GitHub</p><p class="muted mt-1 text-xs">Code Hosting</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-brands fa-wordpress text-4xl text-blue-700"></i>
+            <p class="theme-text mt-4 font-bold">WordPress</p><p class="muted mt-1 text-xs">CMS</p>
+          </div>
+          <div class="surface tech-icon rounded-2xl p-6 text-center">
+            <i class="fa-solid fa-mobile-screen-button text-4xl text-green-600"></i>
+            <p class="theme-text mt-4 font-bold">Responsive UI</p><p class="muted mt-1 text-xs">Mobile First</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED PROJECTS ================= -->
+    <section id="projects" class="section-soft py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.2em] text-blue-600">Selected work</p>
+            <h2 class="theme-text mt-3 text-3xl font-extrabold sm:text-4xl">Featured Projects</h2>
+            <p class="muted mt-4 max-w-xl leading-7">A showcase of portfolio concepts and practice projects. Replace these samples with your real project screenshots and repositories.</p>
+          </div>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-bold text-blue-600 hover:text-blue-700">
+            Visit GitHub <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <article class="project-card surface overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85"
+              alt="E-commerce shopping website concept" loading="lazy" class="h-56 w-full object-cover" />
+            <div class="p-6">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-600">E-commerce</span>
+              <h3 class="theme-text mt-2 text-xl font-bold">DY Tech Gadget Store</h3>
+              <p class="muted mt-3 text-sm leading-7">A gadget store concept featuring product listings, pricing, installment information, and a shopping interface.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">HTML</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">Tailwind CSS</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">JavaScript</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">PHP / Laravel planned</span>
+              </div>
+              <a href="#contact" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-blue-600">Discuss a similar project <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="project-card surface overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85"
+              alt="Business analytics dashboard on a screen" loading="lazy" class="h-56 w-full object-cover" />
+            <div class="p-6">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Business Tools</span>
+              <h3 class="theme-text mt-2 text-xl font-bold">Inventory Monitoring Dashboard</h3>
+              <p class="muted mt-3 text-sm leading-7">A practice concept for monitoring stock levels, material requests, received items, withdrawals, and inventory variances.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">HTML</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">Tailwind CSS</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">JavaScript</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">Laravel roadmap</span>
+              </div>
+              <a href="#contact" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-blue-600">Discuss a similar project <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="project-card surface overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=85"
+              alt="Modern website displayed on a laptop" loading="lazy" class="h-56 w-full object-cover" />
+            <div class="p-6">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Web Design</span>
+              <h3 class="theme-text mt-2 text-xl font-bold">Business Landing Page</h3>
+              <p class="muted mt-3 text-sm leading-7">A responsive website concept with a clear hero section, service cards, project highlights, and contact calls to action.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">HTML</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">CSS</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">Tailwind CSS</span>
+                <span class="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">Responsive UI</span>
+              </div>
+              <a href="#contact" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-blue-600">Discuss a similar project <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+
+        <p class="muted mt-8 text-center text-sm">Project cards are sample portfolio content. Clearly label concepts and work in progress until the projects are complete.</p>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section id="testimonials" class="section-light py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-sm font-bold uppercase tracking-[.2em] text-blue-600">Trust & collaboration</p>
+          <h2 class="theme-text mt-3 text-3xl font-extrabold sm:text-4xl">Testimonials</h2>
+          <p class="muted mt-4 leading-7">A place to feature genuine feedback from clients, colleagues, or project collaborators.</p>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <article class="surface rounded-2xl p-7">
+            <div class="mb-5 flex gap-1 text-amber-400" aria-label="Five stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <i class="fa-solid fa-quote-left text-2xl text-blue-200"></i>
+            <p class="testimonial-quote mt-4 leading-7 text-slate-600">Your client's feedback about your communication, delivery, and website quality can be featured here.</p>
+            <div class="mt-6 border-t border-slate-100 pt-5">
+              <p class="theme-text font-bold">Client Name</p>
+              <p class="muted mt-1 text-sm">Client / Business Owner</p>
+            </div>
+          </article>
+
+          <article class="surface rounded-2xl p-7">
+            <div class="mb-5 flex gap-1 text-amber-400" aria-label="Five stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <i class="fa-solid fa-quote-left text-2xl text-blue-200"></i>
+            <p class="testimonial-quote mt-4 leading-7 text-slate-600">Use this section to share authentic comments about your problem-solving, teamwork, or project experience.</p>
+            <div class="mt-6 border-t border-slate-100 pt-5">
+              <p class="theme-text font-bold">Collaborator Name</p>
+              <p class="muted mt-1 text-sm">Project Collaborator</p>
+            </div>
+          </article>
+
+          <article class="surface rounded-2xl p-7">
+            <div class="mb-5 flex gap-1 text-amber-400" aria-label="Five stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <i class="fa-solid fa-quote-left text-2xl text-blue-200"></i>
+            <p class="testimonial-quote mt-4 leading-7 text-slate-600">Add a real testimonial here once you have permission to publish the person's feedback.</p>
+            <div class="mt-6 border-t border-slate-100 pt-5">
+              <p class="theme-text font-bold">Colleague Name</p>
+              <p class="muted mt-1 text-sm">Professional Reference</p>
+            </div>
+          </article>
+        </div>
+        <p class="muted mt-6 text-center text-xs">These are placeholders, not actual client endorsements. Replace them with real testimonials before publishing.</p>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="section-soft py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-2">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.2em] text-blue-600">Let's work together</p>
+            <h2 class="theme-text mt-3 text-3xl font-extrabold sm:text-4xl">Have a Project in Mind?</h2>
+            <p class="muted mt-5 max-w-lg leading-8">
+              Need a website for your business, an online store, or a custom workflow tool? Tell me about your goals and let's discuss a solution.
+            </p>
+
+            <div class="mt-9 space-y-5">
+              <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-lg text-blue-600"><i class="fa-regular fa-envelope"></i></div>
+                <div>
+                  <p class="theme-text font-bold">Email</p>
+                  <a href="mailto:your-email@example.com" class="muted mt-1 text-sm hover:text-blue-600">your-email@example.com</a>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-lg text-blue-600"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <p class="theme-text font-bold">Location</p>
+                  <p class="muted mt-1 text-sm">Davao Region, Philippines · Available for remote projects</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-lg text-blue-600"><i class="fa-brands fa-github"></i></div>
+                <div>
+                  <p class="theme-text font-bold">GitHub</p>
+                  <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="muted mt-1 text-sm hover:text-blue-600">View my repositories</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-3">
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-lg transition hover:border-blue-600 hover:bg-blue-600 hover:text-white"><i class="fa-brands fa-github"></i></a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-lg transition hover:border-blue-600 hover:bg-blue-600 hover:text-white"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-lg transition hover:border-blue-600 hover:bg-blue-600 hover:text-white"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+          </div>
+
+          <div class="surface rounded-3xl p-6 shadow-sm sm:p-9">
+            <h3 class="theme-text text-2xl font-bold">Send Me a Message</h3>
+            <p class="muted mt-2 text-sm">Tell me a little about your project.</p>
+
+            <form id="contactForm" class="mt-7 space-y-5">
+              <div>
+                <label for="name" class="theme-text mb-2 block text-sm font-semibold">Your Name</label>
+                <input id="name" name="name" type="text" required maxlength="100" autocomplete="name" placeholder="Enter your name"
+                  class="form-field w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10" />
+              </div>
+              <div>
+                <label for="email" class="theme-text mb-2 block text-sm font-semibold">Email Address</label>
+                <input id="email" name="email" type="email" required maxlength="150" autocomplete="email" placeholder="you@example.com"
+                  class="form-field w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10" />
+              </div>
+              <div>
+                <label for="service" class="theme-text mb-2 block text-sm font-semibold">Service Interested In</label>
+                <select id="service" name="service" required
+                  class="form-field w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10">
+                  <option value="">Select a service</option>
+                  <option>Website Development</option>
+                  <option>PHP & Laravel Development</option>
+                  <option>E-commerce Website</option>
+                  <option>Website Redesign</option>
+                  <option>Business Workflow Tools</option>
+                  <option>Website Maintenance</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="message" class="theme-text mb-2 block text-sm font-semibold">Project Details</label>
+                <textarea id="message" name="message" rows="4" required maxlength="3000" placeholder="What would you like to build?"
+                  class="form-field w-full resize-y rounded-xl border border-slate-200 bg-white px-4 py-3.5 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"></textarea>
+              </div>
+              <button type="submit" class="w-full rounded-xl bg-blue-600 px-6 py-4 font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700">
+                Prepare Email <i class="fa-regular fa-paper-plane ml-2"></i>
+              </button>
+              <p id="formNotice" class="muted text-sm" role="status" aria-live="polite">
+                This demo prepares an email in your email app. It does not send or store messages on a server.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-950 py-8 text-white">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-center sm:flex-row sm:text-left lg:px-8">
+      <a href="#home" class="text-lg font-extrabold">Glenn Gonzaga<span class="text-blue-400">.</span></a>
+      <p class="text-sm text-slate-400">© <span id="currentYear"></span> Glenn Gonzaga. All rights reserved.</p>
+      <a href="#home" class="text-sm font-semibold text-slate-300 transition hover:text-blue-400">
+        Back to top <i class="fa-solid fa-arrow-up ml-1"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const menuToggle = document.getElementById('menuToggle');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileNav = document.getElementById('mobileNav');
+
+    // Apply the saved theme, if available.
+    try {
+      const savedTheme = localStorage.getItem('glenn-portfolio-theme');
+      if (savedTheme === 'dark') root.classList.add('dark');
+    } catch (error) {
+      // Theme switching still works if browser storage is unavailable.
+    }
+
+    function updateThemeButton() {
+      const isDark = root.classList.contains('dark');
+      themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      themeToggle.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+
+    updateThemeButton();
+
+    themeToggle.addEventListener('click', () => {
+      root.classList.toggle('dark');
+      updateThemeButton();
+
+      try {
+        localStorage.setItem(
+          'glenn-portfolio-theme',
+          root.classList.contains('dark') ? 'dark' : 'light'
+        );
+      } catch (error) {
+        // Theme remains active for this page session.
+      }
+    });
+
+    // Mobile navigation
+    menuToggle.addEventListener('click', () => {
+      const isHidden = mobileNav.classList.toggle('hidden');
+      menuToggle.setAttribute('aria-expanded', String(!isHidden));
+      menuToggle.setAttribute('aria-label', isHidden ? 'Open navigation menu' : 'Close navigation menu');
+      menuIcon.className = isHidden ? 'fa-solid fa-bars' : 'fa-solid fa-xmark';
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        menuIcon.className = 'fa-solid fa-bars';
+      });
+    });
+
+    // Footer year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Demo contact form: prepare an email rather than pretending to send it.
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value.trim();
+
+      // Replace this placeholder with your real email address.
+      const recipient = 'your-email@example.com';
+
+      if (recipient === 'your-email@example.com') {
+        document.getElementById('formNotice').textContent =
+          'Please replace your-email@example.com in the HTML with your real email address before using this form.';
+        return;
+      }
+
+      const subject = encodeURIComponent('Portfolio inquiry: ' + service);
+      const body = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Service: ' + service + '\n\n' +
+        'Project details:\n' + message
+      );
+
+      document.getElementById('formNotice').textContent =
+        'Opening your email application. Please review and send the message there.';
+
+      window.location.href = 'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
+    });
+  </script>
+   <script type="module" src="/src/main.js"></script>
+</body>
+</html>
