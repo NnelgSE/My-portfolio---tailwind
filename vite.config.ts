@@ -7,5 +7,5 @@ export default defineConfig({
     vue(),
     tailwindcss(),
   ],
-  base: '/',
+  base: mode === 'githubmy-vue-app/' : '/',
 })
